@@ -4,27 +4,24 @@ function build_calendar($month, $year) {
  
      
   
-     // Create array containing abbreviations of days of week.
+     // Создание массива дней недели
      $daysOfWeek = array('Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье');
 
-     // What is the first day of the month in question?
+     // инициализация первого дня месяца
      $firstDayOfMonth = mktime(0,0,0,$month,1,$year);
 
-     // How many days does this month contain?
+     // кол дней в месяце
      $numberDays = date('t',$firstDayOfMonth);
 
-     // Retrieve some information about the first day of the
-     // month in question.
      $dateComponents = getdate($firstDayOfMonth);
 
-     // What is the name of the month in question?
+     // Имя месяца
      $monthName = $dateComponents['month'];
 
-     // What is the index value (0-6) of the first day of the
-     // month in question.
+     // индекс дней недели от 0 до 6
      $dayOfWeek = $dateComponents['wday'];
 
-     // Create the table tag opener and day headers
+     // Создание таблицы
      
     $datetoday = date('Y-m-d');
     
@@ -42,23 +39,19 @@ function build_calendar($month, $year) {
         
       $calendar .= "<tr>";
 
-     // Create the calendar headers
+     // Хидер таблицы
 
      foreach($daysOfWeek as $day) {
           $calendar .= "<th  class='header'>$day</th>";
      } 
 
-     // Create the rest of the calendar
 
-     // Initiate the day counter, starting with the 1st.
 
      $currentDay = 1;
 
      $calendar .= "</tr><tr>";
 
-     // The variable $dayOfWeek is used to
-     // ensure that the calendar
-     // display consists of exactly 7 columns.
+     //проверка столбцов на 7
 
      if ($dayOfWeek > 0) { 
          for($k=0;$k<$dayOfWeek;$k++){
@@ -72,7 +65,7 @@ function build_calendar($month, $year) {
   
      while ($currentDay <= $numberDays) {
 
-          // Seventh column (Saturday) reached. Start a new row.
+         // новый столбец при заполнение
 
           if ($dayOfWeek == 7) {
 
@@ -87,22 +80,16 @@ function build_calendar($month, $year) {
             $dayname = strtolower(date('l', strtotime($date)));
             $eventNum = 0;
             $today = $date==date('Y-m-d')? "today" : "";
-         // if($date<date('Y-m-d')){
-
+     
              $calendar.="<td><h4>$currentDay  </h4>   
              <button class='btn  btn-xs' data-toggle='modal' data-target='#myModal'> Добавить событие   </button>";
  
-         // }else(in_array($date, $bookings)){
-         //     $calendar.="<td class='$today'><h4>$currentDay</h4> <button class='btn btn-danger btn-xs'>Already Booked</button>";
-         // }else{
-         //     $calendar.="<td class='$today'><h4>$currentDay</h4> <a href='book.php?date=".$date."' class='btn btn-success btn-xs'>Book</a>";
-         // }
-            
+
             
            
             
           $calendar .="</td>";
-          // Increment counters
+       
  
           $currentDay++;
           $dayOfWeek++;
@@ -111,7 +98,7 @@ function build_calendar($month, $year) {
      
      
 
-     // Complete the row of the last week in month, if necessary
+     
 
      if ($dayOfWeek != 7) { 
      
@@ -181,10 +168,7 @@ function build_calendar($month, $year) {
           <div class="row">
               <div class="col-md-12">
                   <form action="check.php" method="post"> 
-                  <!--       <div class="form-group">
-                            <label for="">Время</label>
-                            <input required type="text"  name="time" class="form-control">
-                        </div> -->
+            
                         <div class="form-group">
                             <label for="">Название событии</label>
                             <input  type="text"  name="event" class="form-control">

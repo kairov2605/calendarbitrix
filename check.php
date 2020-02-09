@@ -3,7 +3,7 @@
 					$event = $_POST['event'];
 					$importance = $_POST['importance'];
 
-					$mysql = new mysqli('localhost', 'root', 'Demaly100', 'events');
+					$mysql = new mysqli('localhost', 'root', '', 'events');
 					$mysql -> query("INSERT INTO `root`(`event`,`importance`)
 						VALUES('$event','$importance')");
 
